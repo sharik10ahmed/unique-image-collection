@@ -13,7 +13,10 @@ export const Route = createFileRoute("/festive-collection")({
           "Festive Paithani sarees for Diwali, Gudi Padwa, Ganesh Chaturthi and family celebrations — handwoven silk with traditional zari.",
       },
       { property: "og:title", content: "Celebrate Tradition in Paithani" },
-      { property: "og:description", content: "Handloom Paithani silks for Diwali, Gudi Padwa and every celebration." },
+      {
+        property: "og:description",
+        content: "Handloom Paithani silks for Diwali, Gudi Padwa and every celebration.",
+      },
     ],
   }),
   component: FestiveCollection,
@@ -21,7 +24,9 @@ export const Route = createFileRoute("/festive-collection")({
 
 function FestiveCollection() {
   const { products } = useStore();
-  const list = products.filter((p) => p.collections.includes("festive") || p.collections.includes("diwali"));
+  const list = products.filter(
+    (p) => p.collections.includes("festive") || p.collections.includes("diwali"),
+  );
   return (
     <SiteLayout>
       <PageHeader

@@ -13,7 +13,10 @@ export const Route = createFileRoute("/wedding-collection")({
           "Bridal and wedding Paithani sarees with heavy pure zari, peacock motifs and premium handloom silk for your special day.",
       },
       { property: "og:title", content: "Paithani Sarees for Your Special Day" },
-      { property: "og:description", content: "Bridal Paithani woven with heavy zari and traditional Maharashtrian motifs." },
+      {
+        property: "og:description",
+        content: "Bridal Paithani woven with heavy zari and traditional Maharashtrian motifs.",
+      },
     ],
   }),
   component: WeddingCollection,
@@ -21,7 +24,9 @@ export const Route = createFileRoute("/wedding-collection")({
 
 function WeddingCollection() {
   const { products } = useStore();
-  const list = products.filter((p) => p.collections.includes("wedding") || p.collections.includes("bridal"));
+  const list = products.filter(
+    (p) => p.collections.includes("wedding") || p.collections.includes("bridal"),
+  );
   return (
     <SiteLayout>
       <PageHeader

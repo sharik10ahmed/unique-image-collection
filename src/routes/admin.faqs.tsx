@@ -9,7 +9,10 @@ export const Route = createFileRoute("/admin/faqs")({
   head: () => ({
     meta: [
       { title: "FAQs | Rituraj Paithani Admin" },
-      { name: "description", content: "Manage the questions and answers shown on the storefront FAQ page." },
+      {
+        name: "description",
+        content: "Manage the questions and answers shown on the storefront FAQ page.",
+      },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "FAQs | Rituraj Paithani Admin" },
       { property: "og:description", content: "FAQ content management." },
@@ -29,7 +32,11 @@ function AdminFaqs() {
       notify("Question is required");
       return;
     }
-    setFaqs((prev) => (editing.id ? prev.map((f) => (f.id === editing.id ? editing : f)) : [...prev, { ...editing, id: "f" + (Date.now() % 100000) }]));
+    setFaqs((prev) =>
+      editing.id
+        ? prev.map((f) => (f.id === editing.id ? editing : f))
+        : [...prev, { ...editing, id: "f" + (Date.now() % 100000) }],
+    );
     notify(editing.id ? "FAQ updated" : "FAQ added");
     setEditing(null);
   };
@@ -57,13 +64,30 @@ function AdminFaqs() {
         ))}
       </AdminTable>
 
-      <Modal open={!!editing} onClose={() => setEditing(null)} title={editing?.id ? "Edit FAQ" : "Add FAQ"}>
+      <Modal
+        open={!!editing}
+        onClose={() => setEditing(null)}
+        title={editing?.id ? "Edit FAQ" : "Add FAQ"}
+      >
         {editing ? (
           <div className="space-y-4">
-            <Field label="Question"><Input value={editing.question} onChange={(e) => setEditing({ ...editing, question: e.target.value })} /></Field>
-            <Field label="Answer"><Textarea rows={4} value={editing.answer} onChange={(e) => setEditing({ ...editing, answer: e.target.value })} /></Field>
+            <Field label="Question">
+              <Input
+                value={editing.question}
+                onChange={(e) => setEditing({ ...editing, question: e.target.value })}
+              />
+            </Field>
+            <Field label="Answer">
+              <Textarea
+                rows={4}
+                value={editing.answer}
+                onChange={(e) => setEditing({ ...editing, answer: e.target.value })}
+              />
+            </Field>
             <div className="flex justify-end gap-2">
-              <Button variant="ghost" onClick={() => setEditing(null)}>Cancel</Button>
+              <Button variant="ghost" onClick={() => setEditing(null)}>
+                Cancel
+              </Button>
               <Button onClick={save}>Save</Button>
             </div>
           </div>

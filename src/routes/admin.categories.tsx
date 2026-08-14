@@ -9,7 +9,10 @@ export const Route = createFileRoute("/admin/categories")({
   head: () => ({
     meta: [
       { title: "Manage Categories | Rituraj Paithani Admin" },
-      { name: "description", content: "Create, edit, enable or disable Paithani storefront collections." },
+      {
+        name: "description",
+        content: "Create, edit, enable or disable Paithani storefront collections.",
+      },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Manage Categories | Rituraj Paithani Admin" },
       { property: "og:description", content: "Collection management for the boutique storefront." },
@@ -18,7 +21,14 @@ export const Route = createFileRoute("/admin/categories")({
   component: AdminCategories,
 });
 
-const blank: Category = { id: "", name: "", slug: "", description: "", image: images.catalog.c1, enabled: true };
+const blank: Category = {
+  id: "",
+  name: "",
+  slug: "",
+  description: "",
+  image: images.catalog.c1,
+  enabled: true,
+};
 
 function AdminCategories() {
   const { categories, setCategories, products, notify } = useStore();
@@ -50,7 +60,12 @@ function AdminCategories() {
           <tr key={c.id}>
             <td className="px-4 py-3">
               <div className="flex items-center gap-3">
-                <img src={c.image} alt={c.name} loading="lazy" className="h-12 w-10 rounded-sm object-cover" />
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  loading="lazy"
+                  className="h-12 w-10 rounded-sm object-cover"
+                />
                 <div>
                   <p>{c.name}</p>
                   <p className="max-w-64 truncate text-xs text-muted-foreground">{c.description}</p>
@@ -62,11 +77,15 @@ function AdminCategories() {
             <td className="px-4 py-3">
               <button
                 onClick={() => {
-                  setCategories((prev) => prev.map((x) => (x.id === c.id ? { ...x, enabled: !x.enabled } : x)));
+                  setCategories((prev) =>
+                    prev.map((x) => (x.id === c.id ? { ...x, enabled: !x.enabled } : x)),
+                  );
                   notify(c.enabled ? "Category disabled" : "Category enabled");
                 }}
               >
-                <Badge tone={c.enabled ? "green" : "muted"}>{c.enabled ? "Enabled" : "Disabled"}</Badge>
+                <Badge tone={c.enabled ? "green" : "muted"}>
+                  {c.enabled ? "Enabled" : "Disabled"}
+                </Badge>
               </button>
             </td>
             <td className="px-4 py-3">
@@ -82,14 +101,38 @@ function AdminCategories() {
         ))}
       </AdminTable>
 
-      <Modal open={!!editing} onClose={() => setEditing(null)} title={editing?.id ? "Edit Category" : "Add Category"}>
+      <Modal
+        open={!!editing}
+        onClose={() => setEditing(null)}
+        title={editing?.id ? "Edit Category" : "Add Category"}
+      >
         {editing ? (
           <div className="space-y-4">
-            <Field label="Name"><Input value={editing.name} onChange={(e) => setEditing({ ...editing, name: e.target.value })} /></Field>
-            <Field label="Slug"><Input value={editing.slug} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} placeholder="wedding-paithani" /></Field>
-            <Field label="Description"><Textarea rows={3} value={editing.description} onChange={(e) => setEditing({ ...editing, description: e.target.value })} /></Field>
+            <Field label="Name">
+              <Input
+                value={editing.name}
+                onChange={(e) => setEditing({ ...editing, name: e.target.value })}
+              />
+            </Field>
+            <Field label="Slug">
+              <Input
+                value={editing.slug}
+                onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
+                placeholder="wedding-paithani"
+              />
+            </Field>
+            <Field label="Description">
+              <Textarea
+                rows={3}
+                value={editing.description}
+                onChange={(e) => setEditing({ ...editing, description: e.target.value })}
+              />
+            </Field>
             <Field label="Banner image">
-              <Select value={editing.image} onChange={(e) => setEditing({ ...editing, image: e.target.value })}>
+              <Select
+                value={editing.image}
+                onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+              >
                 <option value={images.catalog.c1}>Traditional Paithani stack</option>
                 <option value={images.catalog.c2}>Bridal Paithani styling</option>
                 <option value={images.catalog.c3}>Festive Diwali silks</option>
@@ -101,11 +144,18 @@ function AdminCategories() {
               </Select>
             </Field>
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={editing.enabled} onChange={(e) => setEditing({ ...editing, enabled: e.target.checked })} className="accent-[var(--primary)]" />
+              <input
+                type="checkbox"
+                checked={editing.enabled}
+                onChange={(e) => setEditing({ ...editing, enabled: e.target.checked })}
+                className="accent-[var(--primary)]"
+              />
               Show on storefront
             </label>
             <div className="flex justify-end gap-2">
-              <Button variant="ghost" onClick={() => setEditing(null)}>Cancel</Button>
+              <Button variant="ghost" onClick={() => setEditing(null)}>
+                Cancel
+              </Button>
               <Button onClick={save}>Save Category</Button>
             </div>
           </div>

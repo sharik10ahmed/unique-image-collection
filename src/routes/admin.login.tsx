@@ -8,7 +8,10 @@ export const Route = createFileRoute("/admin/login")({
   head: () => ({
     meta: [
       { title: "Admin Login | Rituraj Paithani" },
-      { name: "description", content: "Secure admin access for managing the Rituraj Paithani storefront." },
+      {
+        name: "description",
+        content: "Secure admin access for managing the Rituraj Paithani storefront.",
+      },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Admin Login | Rituraj Paithani" },
       { property: "og:description", content: "Store management access for Rituraj Paithani." },
@@ -54,20 +57,35 @@ function AdminLogin() {
           <div className="gold-rule my-6 w-20" />
           <div className="space-y-4">
             <Field label="Email">
-              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@riturajpaithani.com" />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@riturajpaithani.com"
+              />
             </Field>
             <Field label="Password">
-              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+              />
             </Field>
             {error ? <p className="text-xs text-destructive">{error}</p> : null}
-            <Button type="submit" size="lg" className="w-full">Log In</Button>
+            <Button type="submit" size="lg" className="w-full">
+              Log In
+            </Button>
           </div>
           <div className="mt-6 rounded-sm border border-accent/40 bg-card p-4 text-xs text-muted-foreground">
             <p className="text-accent">Demo credentials</p>
             <p className="mt-1">admin@riturajpaithani.com</p>
             <p>admin123</p>
           </div>
-          <Link to="/" className="mt-6 block text-center text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-secondary">
+          <Link
+            to="/"
+            className="mt-6 block text-center text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-secondary"
+          >
             ← Back to store
           </Link>
         </form>

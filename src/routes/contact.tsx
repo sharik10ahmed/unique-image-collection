@@ -45,64 +45,99 @@ function Contact() {
         subtitle="Come see the weaves in person, or send us a note and we will guide you to the right Paithani."
       />
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 lg:grid-cols-2 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:py-14 lg:grid-cols-2 lg:gap-10 lg:px-8">
         <div>
-          <h2 className="text-3xl text-primary">{business.name}</h2>
-          <div className="gold-rule my-5 w-24" />
-          <ul className="space-y-5 text-sm">
-            <li className="flex gap-4">
+          <h2 className="text-2xl sm:text-3xl text-primary">{business.name}</h2>
+          <div className="gold-rule my-3 sm:my-5 w-24" />
+          <ul className="space-y-4 text-xs sm:text-sm">
+            <li className="flex gap-3.5">
               <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <span className="leading-relaxed text-muted-foreground">{business.address}</span>
             </li>
-            <li className="flex gap-4">
+            <li className="flex gap-3.5">
               <IconPhone className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <a href={`tel:${business.phone}`} className="hover:text-secondary">{business.phone}</a>
+              <a href={`tel:${business.phone}`} className="hover:text-secondary">
+                {business.phone}
+              </a>
             </li>
-            <li className="flex gap-4">
+            <li className="flex gap-3.5">
               <IconMail className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <a href={`mailto:${business.email}`} className="hover:text-secondary">{business.email}</a>
+              <a href={`mailto:${business.email}`} className="hover:text-secondary">
+                {business.email}
+              </a>
             </li>
           </ul>
 
-          <div className="mt-8 rounded-sm border border-border bg-card p-5 text-sm">
-            <h3 className="text-lg text-primary">Boutique Hours</h3>
+          <div className="mt-6 sm:mt-8 rounded-sm border border-border bg-card p-4 sm:p-5 text-xs sm:text-sm">
+            <h3 className="text-base sm:text-lg font-medium text-primary">
+              Boutique Visiting Hours
+            </h3>
             <p className="mt-2 text-muted-foreground">Monday – Saturday · 10:30 AM – 8:30 PM</p>
             <p className="text-muted-foreground">Sunday · 11:00 AM – 6:00 PM</p>
           </div>
 
-          <div className="mt-8 overflow-hidden rounded-sm border border-accent/40">
-            <div className="relative grid h-56 place-items-center bg-[repeating-linear-gradient(45deg,var(--muted),var(--muted)_12px,var(--card)_12px,var(--card)_24px)]">
-              <div className="rounded-sm border border-accent/50 bg-card/95 px-5 py-4 text-center">
-                <IconPin className="mx-auto h-6 w-6 text-accent" />
-                <p className="mt-2 text-sm text-primary">Samruddhi Market, Sangarsh Chowk</p>
-                <p className="text-xs text-muted-foreground">Kharadi Road, Wadgaon Sheri, Pune 411014</p>
+          <div className="mt-6 sm:mt-8 overflow-hidden rounded-sm border border-accent/40">
+            <div className="relative grid h-44 sm:h-56 place-items-center bg-[repeating-linear-gradient(45deg,var(--muted),var(--muted)_12px,var(--card)_12px,var(--card)_24px)]">
+              <div className="rounded-sm border border-accent/50 bg-card/95 px-4 py-3 sm:px-5 sm:py-4 text-center">
+                <IconPin className="mx-auto h-5 w-5 sm:h-6 sm:w-6 text-accent" />
+                <p className="mt-1.5 text-xs sm:text-sm font-medium text-primary">
+                  Samruddhi Market, Sangarsh Chowk
+                </p>
+                <p className="text-[11px] sm:text-xs text-muted-foreground">
+                  Kharadi Road, Wadgaon Sheri, Pune 411014
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <form onSubmit={submit} className="h-fit rounded-sm border border-accent/40 bg-card p-6">
-          <h2 className="text-2xl text-primary">Send an Enquiry</h2>
-          <div className="gold-rule my-4 w-20" />
-          <div className="space-y-4">
+        <form
+          onSubmit={submit}
+          className="h-fit rounded-sm border border-accent/40 bg-card p-5 sm:p-6"
+        >
+          <h2 className="text-xl sm:text-2xl text-primary">Send an Enquiry</h2>
+          <div className="gold-rule my-3 sm:my-4 w-20" />
+          <div className="space-y-3.5 sm:space-y-4">
             <Field label="Name *">
-              <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" />
+              <Input
+                required
+                autoComplete="name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Your name"
+              />
             </Field>
             <Field label="Phone *">
-              <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="98xxxxxxxx" />
+              <Input
+                required
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                placeholder="98xxxxxxxx"
+              />
             </Field>
             <Field label="Email">
-              <Input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" />
+              <Input
+                type="email"
+                autoComplete="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="you@example.com"
+              />
             </Field>
             <Field label="Message">
               <Textarea
-                rows={5}
+                rows={4}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="Tell us the occasion, colour or motif you are looking for…"
               />
             </Field>
-            <Button type="submit" size="lg" className="w-full">Submit Enquiry</Button>
+            <Button type="submit" size="lg" className="w-full">
+              Submit Enquiry
+            </Button>
             {sent ? (
               <p className="rounded-sm border border-peacock/40 bg-peacock/10 px-4 py-3 text-center text-xs text-peacock">
                 Thank you. Our boutique team will contact you shortly.

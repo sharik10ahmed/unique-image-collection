@@ -10,7 +10,8 @@ export const Route = createFileRoute("/category/$category")({
       { title: "Paithani Collection | Rituraj Paithani" },
       {
         name: "description",
-        content: "Explore handloom Paithani sarees from this collection — pure zari, traditional motifs and premium silk.",
+        content:
+          "Explore handloom Paithani sarees from this collection — pure zari, traditional motifs and premium silk.",
       },
       { property: "og:title", content: "Paithani Collection | Rituraj Paithani" },
       { property: "og:description", content: "Handwoven Paithani sarees curated by collection." },
@@ -34,8 +35,13 @@ function CategoryPage() {
       />
       <div className="mx-auto max-w-7xl px-4 py-14 lg:px-8">
         {list.length === 0 ? (
-          <EmptyState title="This collection is being woven" text="New pieces for this collection arrive shortly. Explore the rest of our Paithani sarees meanwhile.">
-            <Link to="/shop"><Button>Browse All Paithani</Button></Link>
+          <EmptyState
+            title="This collection is being woven"
+            text="New pieces for this collection arrive shortly. Explore the rest of our Paithani sarees meanwhile."
+          >
+            <Link to="/shop">
+              <Button>Browse All Paithani</Button>
+            </Link>
           </EmptyState>
         ) : (
           <ProductGrid products={list} />

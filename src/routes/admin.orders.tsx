@@ -9,7 +9,10 @@ export const Route = createFileRoute("/admin/orders")({
   head: () => ({
     meta: [
       { title: "Manage Orders | Rituraj Paithani Admin" },
-      { name: "description", content: "Track and update Paithani saree orders from placement to delivery." },
+      {
+        name: "description",
+        content: "Track and update Paithani saree orders from placement to delivery.",
+      },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Manage Orders | Rituraj Paithani Admin" },
       { property: "og:description", content: "Order tracking and fulfilment for the boutique." },
@@ -18,7 +21,14 @@ export const Route = createFileRoute("/admin/orders")({
   component: AdminOrders,
 });
 
-const statuses: Order["status"][] = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"];
+const statuses: Order["status"][] = [
+  "Pending",
+  "Confirmed",
+  "Processing",
+  "Shipped",
+  "Delivered",
+  "Cancelled",
+];
 
 function AdminOrders() {
   const { orders, setOrders, notify } = useStore();
@@ -30,14 +40,26 @@ function AdminOrders() {
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <Select className="max-w-56" value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="all">All statuses</option>
-          {statuses.map((s) => <option key={s} value={s}>{s}</option>)}
+          {statuses.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
         </Select>
-        <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{list.length} orders</p>
+        <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+          {list.length} orders
+        </p>
       </div>
 
-      <AdminTable head={["Order ID", "Customer", "Products", "Amount", "Date", "Payment", "Status"]}>
+      <AdminTable
+        head={["Order ID", "Customer", "Products", "Amount", "Date", "Payment", "Status"]}
+      >
         {list.length === 0 ? (
-          <tr><td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">No orders with this status.</td></tr>
+          <tr>
+            <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
+              No orders with this status.
+            </td>
+          </tr>
         ) : (
           list.map((o) => (
             <tr key={o.id}>
@@ -50,7 +72,13 @@ function AdminOrders() {
               <td className="px-4 py-3">{formatINR(o.amount)}</td>
               <td className="px-4 py-3 text-muted-foreground">{o.date}</td>
               <td className="px-4 py-3">
-                <Badge tone={o.payment === "Paid" ? "green" : o.payment === "Refunded" ? "maroon" : "muted"}>{o.payment}</Badge>
+                <Badge
+                  tone={
+                    o.payment === "Paid" ? "green" : o.payment === "Refunded" ? "maroon" : "muted"
+                  }
+                >
+                  {o.payment}
+                </Badge>
               </td>
               <td className="px-4 py-3">
                 <Select
@@ -62,7 +90,11 @@ function AdminOrders() {
                     notify(`${o.id} → ${status}`);
                   }}
                 >
-                  {statuses.map((s) => <option key={s} value={s}>{s}</option>)}
+                  {statuses.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
                 </Select>
               </td>
             </tr>
